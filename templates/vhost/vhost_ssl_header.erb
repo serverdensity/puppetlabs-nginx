@@ -15,3 +15,6 @@ server {
   ssl_protocols  SSLv3 TLSv1;
   ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
   ssl_prefer_server_ciphers   on;
+  ssl_protocols TLSv1.1 TLSv1.2 TLSv1 SSLv3;
+  # prefer RC4-SHA to avoid BEAST
+  ssl_ciphers RC4:HIGH:!aNULL:!MD5;
