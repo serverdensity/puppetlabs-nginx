@@ -25,6 +25,8 @@
 #   [*www_root*]            - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
 #   [*rewrite_www_to_non_www*]  - Adds a server directive and rewrite rule to rewrite www.domain.com to domain.com in order to avoid
 #                             duplicate content (SEO);
+#   [*sts_max_age*]         - in seconds. Adds a Strict-Transport-Security header using the given seconds value.
+#                             http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
 #   [*try_files*]           - Specifies the locations for files to be checked as an array. Cannot be used in conjuction with $proxy.
 #
 # Actions:
