@@ -12,8 +12,7 @@ server {
 
   ssl_session_timeout  5m;
 
-  ssl_protocols  SSLv3 TLSv1;
-  ssl_prefer_server_ciphers   on;
   ssl_protocols TLSv1.1 TLSv1.2 TLSv1 SSLv3;
+  ssl_prefer_server_ciphers   on;
   # prefer RC4-SHA to avoid BEAST
   ssl_ciphers RC4:HIGH:!aNULL:!MD5;
