@@ -12,6 +12,7 @@
 #                              with nginx::resource::upstream
 #   [*proxy_read_timeout*]   - Override the default the proxy read timeout value of 90 seconds
 #   [*proxy_set_header*]     - Override the default proxy headers
+#   [*proxy_buffering*]      - Override the default proxy_buffering configuration of ON
 #   [*ssl*]                  - Indicates whether to setup SSL bindings for this location.
 #   [*ssl_only*]	     - Required if the SSL and normal vHost have the same port.
 #   [*location_alias*]       - Path to be used as basis for serving requests for this location
@@ -56,6 +57,7 @@ define nginx::resource::location(
   $proxy                = undef,
   $proxy_read_timeout   = $nginx::params::nx_proxy_read_timeout,
   $proxy_set_header     = undef, 
+  $proxy_buffering      = undef, 
   $ssl                  = false,
   $ssl_only		= false,
   $location_alias       = undef,
