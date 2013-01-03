@@ -7,7 +7,8 @@
 <% if @proxy_set_header -%><% proxy_set_header.each do |header| -%>
     proxy_set_header        <%= header %>;
 <% end -%><% end -%>
-<% if @proxy_buffering -%>proxy_buffering off;<% end %>
+<% if @proxy_buffering -%>
+    proxy_buffering off;<% end %>
 <% if @location_cfg_append -%><% location_cfg_append.each do |key,value| -%>
     <%= key %> <%= value %>;
 <% end -%><% end -%>
