@@ -4,6 +4,9 @@
 <% end -%><% end -%>
     proxy_pass <%= proxy %>;
     proxy_read_timeout <%= proxy_read_timeout %>;
+<% proxy_set_header.each do |header| %>
+    proxy_set_header        <%= header %>;
+<% end %>
 <% if @location_cfg_append -%><% location_cfg_append.each do |key,value| -%>
     <%= key %> <%= value %>;
 <% end -%><% end -%>
