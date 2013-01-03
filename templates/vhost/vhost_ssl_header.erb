@@ -5,6 +5,7 @@ server {
   <% end %>
   <% if @sts_max_age %>add_header Strict-Transport-Security "max-age=<%= sts_max_age %>; includeSubdomains";<% end %>
   server_name  <%= rewrite_www_to_non_www ? name.gsub(/^www\./, '') : server_name.join(" ") %>;
+  access_log            <%= scope.lookupvar('nginx::params::nx_logdir')%>/<%= name %>.access.log;
 
   ssl on;
   ssl_certificate      <%= ssl_cert %>;
