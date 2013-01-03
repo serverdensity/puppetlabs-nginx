@@ -55,7 +55,7 @@ define nginx::resource::location(
   $index_files          = ['index.html', 'index.htm', 'index.php'],
   $proxy                = undef,
   $proxy_read_timeout   = $nginx::params::nx_proxy_read_timeout,
-  $proxy_set_header     = ['Host $host', 'X-Real-IP $remote_addr', 'X-Forwarded-For $proxy_add_x_forwarded_for',],
+  $proxy_set_header     = undef, 
   $ssl                  = false,
   $ssl_only		= false,
   $location_alias       = undef,
