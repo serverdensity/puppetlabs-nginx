@@ -5,6 +5,7 @@
 # Parameters:
 #   [*ensure*]      - Enables or disables the specified location (present|absent)
 #   [*members*]     - Array of member URIs for NGINX to connect to. Must follow valid NGINX syntax.
+#   [*ip_hash*]     - Enables or disables the ip_hash for the upstream
 #
 # Actions:
 #
@@ -20,7 +21,8 @@
 #    ],
 #  }
 define nginx::resource::upstream (
-  $ensure = 'present',
+  $ensure  = 'present',
+  $ip_hash = undef,
   $members
 ) {
   File {
