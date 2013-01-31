@@ -1,7 +1,6 @@
 upstream <%= name %> {
   <% if @ip_hash -%>
   ip_hash;<% end %>
-  <% end %>
   <% members.each do |i| %>
   server <%= i %>;
   <% end %>
