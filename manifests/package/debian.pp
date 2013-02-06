@@ -31,6 +31,6 @@ class nginx::package::debian {
 
   package { 'nginx':
     ensure => present,
-    require     => Exec['add-apt-repository ppa:chris-lea/nginx-devel']
+    require     => Exec['apt-get update serverdensity']
   }
 }
