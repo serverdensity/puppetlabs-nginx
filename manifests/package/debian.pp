@@ -19,11 +19,12 @@ class nginx::package::debian {
       'add-apt-repository ppa:chris-lea/nginx-devel':
         command     => '/usr/bin/add-apt-repository ppa:chris-lea/nginx-devel',
         creates     => '/etc/apt/sources.list.d/chris-lea-nginx-devel-precise.list',
+        notify      => Exec['apt-get update chris-lea/nginx-devel'],
     }
 
   exec
     {
-      'apt-get update serverdensity':
+      'apt-get update chris-lea/nginx-devel':
         command     => '/usr/bin/apt-get update',
         refreshonly => true,
         require     => Exec['add-apt-repository ppa:chris-lea/nginx-devel']
@@ -31,6 +32,6 @@ class nginx::package::debian {
 
   package { 'nginx':
     ensure => present,
-    require     => Exec['apt-get update serverdensity']
+    require     => Exec['add-apt-repository ppa:chris-lea/nginx-devel','apt-get update chris-lea/nginx-devel']
   }
 }
