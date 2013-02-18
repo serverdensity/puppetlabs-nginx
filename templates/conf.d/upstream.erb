@@ -2,6 +2,6 @@ upstream <%= name %> {
   <% if @ip_hash -%>
   ip_hash;<% end %>
   <% members.each do |i| %>
-  server <%= i %>;
+  server <%= i %>:<%= target_port %>;
   <% end %>
 }
