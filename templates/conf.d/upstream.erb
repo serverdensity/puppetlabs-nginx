@@ -3,5 +3,8 @@ upstream <%= name %> {
   ip_hash;<% end %>
   <% members.each do |i| %>
   server <%= i %>:<%= target_port %>;
+  <% if @backup_port -%>
+  server localhost:<%= backup_port %> backup 
+  <% end %>
   <% end %>
 }

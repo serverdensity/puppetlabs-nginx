@@ -7,6 +7,7 @@
 #   [*members*]     - Array of member URIs for NGINX to connect to. Must follow valid NGINX syntax.
 #   [*target_port*] - Target port for the upstream (default:80)
 #   [*ip_hash*]     - Enables or disables the ip_hash for the upstream
+#   [*backup_port*] - Defines the backup backend port
 #
 # Actions:
 #
@@ -25,6 +26,7 @@ define nginx::resource::upstream (
   $ensure  = 'present',
   $target_port = 80,
   $ip_hash = undef,
+  $backup_port = undef,
   $members
 ) {
   File {
