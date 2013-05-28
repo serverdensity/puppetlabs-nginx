@@ -20,7 +20,7 @@ class nginx::params (
   $nx_conf_dir           = '/etc/nginx',
   $nx_confd_purge        = false,
   $nx_worker_processes   = 1,
-  $worker_rlimit_nofile  = undef,
+  $worker_rlimit_nofile  = 'undef',
   $nx_worker_connections = 1024,
   $nx_multi_accept       = off,
   $nx_sendfile           = on,
