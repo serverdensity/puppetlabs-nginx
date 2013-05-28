@@ -29,12 +29,13 @@
 #   include nginx
 # }
 class nginx (
-  $worker_processes   = $nginx::params::nx_worker_processes,
-  $worker_connections = $nginx::params::nx_worker_connections,
-  $proxy_set_header   = $nginx::params::nx_proxy_set_header,
-  $confd_purge        = $nginx::params::nx_confd_purge,
-  $configtest_enable  = $nginx::params::nx_configtest_enable,
-  $service_restart    = $nginx::params::nx_service_restrart
+  $worker_processes     = $nginx::params::nx_worker_processes,
+  $worker_rlimit_nofile = $nginx::params::worker_rlimit_nofile,
+  $worker_connections   = $nginx::params::nx_worker_connections,
+  $proxy_set_header     = $nginx::params::nx_proxy_set_header,
+  $confd_purge          = $nginx::params::nx_confd_purge,
+  $configtest_enable    = $nginx::params::nx_configtest_enable,
+  $service_restart      = $nginx::params::nx_service_restrart
 ) inherits nginx::params {
 
   include stdlib
@@ -44,12 +45,13 @@ class nginx (
   }
 
   class { 'nginx::config':
-    worker_processes 	=> $worker_processes,
-    worker_connections 	=> $worker_connections,
-    proxy_set_header 	=> $proxy_set_header,
-    confd_purge         => $confd_purge,
-    require 		=> Class['nginx::package'],
-    notify  		=> Class['nginx::service'],
+    worker_processes 	 => $worker_processes,
+    worker_rlimit_nofile => $worker_rlimit_nofile,
+    worker_connections 	 => $worker_connections,
+    proxy_set_header 	 => $proxy_set_header,
+    confd_purge          => $confd_purge,
+    require  		 => Class['nginx::package'],
+    notify  		 => Class['nginx::service'],
   }
 
   class { 'nginx::service': 

@@ -1,5 +1,9 @@
 user <%= scope.lookupvar('nginx::config::nx_daemon_user') %>;
 worker_processes <%= worker_processes %>;
+<% if scope.lookupvar('nginx::params::worker_rlimit_nofile') != undef %>
+# set open fd limit
+worker_rlimit_nofile <%= scope.lookupvar('nginx::params::worker_rlimit_nofile')%>
+<% end %>
 
 error_log  <%= scope.lookupvar('nginx::params::nx_logdir')%>/error.log;
 pid        <%= scope.lookupvar('nginx::params::nx_pid')%>;
