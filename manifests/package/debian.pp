@@ -18,7 +18,7 @@ class nginx::package::debian {
     {
       'add-apt-repository ppa:chris-lea/nginx-devel':
         command     => '/usr/bin/add-apt-repository ppa:chris-lea/nginx-devel',
-        creates     => '/etc/apt/sources.list.d/chris-lea-nginx-devel-precise.list',
+        creates     => "/etc/apt/sources.list.d/chris-lea-nginx-devel-${lsbdistcodename}.list",
         notify      => Exec['apt-get update chris-lea/nginx-devel'],
     }
 
