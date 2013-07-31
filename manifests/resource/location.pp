@@ -6,7 +6,9 @@
 #   [*ensure*]               - Enables or disables the specified location (present|absent)
 #   [*vhost*]                - Defines the default vHost for this location entry to include with
 #   [*location*]             - Specifies the URI associated with this location entry
-#   [*www_root*]             - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
+#   [*www_root*]           - Specifies the location on disk for files to be read from. Cannot be set in conjunction with $proxy
+#   [*alias_root*]         - Specifies a path on disk to the files. Like $www_root, except the location is stripped from the
+#                            request.  Cannot be set in conjunction with either $www_root or $proxy.
 #   [*index_files*]          - Default index files for NGINX to read when traversing a directory
 #   [*proxy*]                - Proxy server(s) for a location to connect to. Accepts a single value, can be used in conjunction
 #                              with nginx::resource::upstream
@@ -53,6 +55,7 @@ define nginx::resource::location(
   $ensure               = present,
   $vhost                = undef,
   $www_root             = undef,
+  $alias_root         = undef,
   $index_files          = ['index.html', 'index.htm', 'index.php'],
   $proxy                = undef,
   $proxy_read_timeout   = $nginx::params::nx_proxy_read_timeout,
@@ -96,11 +99,17 @@ define nginx::resource::location(
   if ($vhost == undef) {
     fail('Cannot create a location reference without attaching to a virtual host')
   }
-  if (($www_root == undef) and ($proxy == undef) and ($location_alias == undef) and ($stub_status == undef) ) {
-    fail('Cannot create a location reference without a www_root, proxy, location_alias or stub_status defined')
+
+  $location_config = [
+    $alias_root ? { undef => 0, default => 1},
+    $www_root   ? { undef => 0, default => 1},
+    $proxy      ? { undef => 0, default => 1}
+  ]
+  if $location_config[0] + $location_config[1] + $location_config[2] > 1 {
+    fail('Cannot define both directory (www_root or alias_root) and proxy in a virtual host')
   }
-  if (($www_root != undef) and ($proxy != undef)) {
-    fail('Cannot define both directory and proxy in a virtual host')
+  if $location_config[0] + $location_config[1] + $location_config[2] == 0 {
+    fail('Cannot create a location reference without a www_root, alias_root, or proxy defined')
   }
 
   ## Create stubs for vHost File Fragment Pattern
