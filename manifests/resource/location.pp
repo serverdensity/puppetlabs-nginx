@@ -87,6 +87,8 @@ define nginx::resource::location(
   # Use proxy template if $proxy is defined, otherwise use directory template.
   if ($proxy != undef) {
     $content_real = template('nginx/vhost/vhost_location_proxy.erb')
+  } elsif ($alias_root != undef) {
+    $content_real = template('nginx/vhost/vhost_location_alias.erb')
   } elsif ($location_alias != undef) {
     $content_real = template('nginx/vhost/vhost_location_alias.erb')
   } elsif ($stub_status != undef) {
