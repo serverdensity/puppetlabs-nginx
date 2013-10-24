@@ -9,3 +9,6 @@ proxy_ignore_client_abort <%= scope.lookupvar('nginx::params::nx_proxy_ignore_cl
 <% proxy_set_header.each do |header| %>
 proxy_set_header        <%= header %>;
 <% end %>
+<% if scope.lookupvar('nginx::params::types_hash_max_size') %>
+types_hash_max_size     <%= scope.lookupvar('nginx::params::types_hash_max_size') %>;
+<% end %>

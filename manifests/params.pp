@@ -21,6 +21,7 @@ class nginx::params (
   $nx_confd_purge        = false,
   $nx_worker_processes   = 1,
   $worker_rlimit_nofile  = 'undef',
+  $types_hash_max_size   = false,
   $nx_worker_connections = 1024,
   $nx_multi_accept       = off,
   $nx_sendfile           = on,
