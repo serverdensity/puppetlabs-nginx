@@ -2,7 +2,7 @@ upstream <%= name %> {
   <% if @ip_hash -%>
   ip_hash;<% end %>
   <% members.each do |i| %>
-          server <%= i %>:<% if target_port != "yes" %><%= target_port %><% end -%>;
+          server <%= i %><% if target_port != "yes" %>:<%= target_port %><% end -%>;
   <% if @backup_port -%>
   server localhost:<%= backup_port %> backup;
   <% end %>
