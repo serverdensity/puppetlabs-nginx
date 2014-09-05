@@ -18,7 +18,7 @@
 <% if @location_cfg_append -%><% location_cfg_append.each do |key,value| -%>
     <%= key %> <%= value %>;
 <% end -%><% end -%>
-<% if @websockets -%>
+<% if @websockets or @location_websockets -%>
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";<% end -%>
