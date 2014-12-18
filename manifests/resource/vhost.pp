@@ -56,6 +56,8 @@ define nginx::resource::vhost(
   $ssl                    = false,
   $ssl_cert               = undef,
   $ssl_key                = undef,
+  $ipv4_listen_ip0        = undef,
+  $ipv4_listen_ip1        = undef,
   $ssl_port		  = '443',
   $proxy                  = undef,
   $cond_proxy             = undef,
